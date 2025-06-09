@@ -1,0 +1,34 @@
+Program = { Statement } ;
+
+Statement = VarDecl | Assignment | FunctionDecl | IfStmt | LoopStmt | TaskStmt | ExpressionStmt ;
+
+VarDecl = "remember" Identifier "is" Expression [TypeHint] ;
+Assignment = "set" Identifier "to" Expression ;
+
+TypeHint = "as" Type ;
+
+FunctionDecl = "when" Identifier "do" Block ;
+ReturnStmt = "return" Expression ;
+
+IfStmt = "if" Condition "then" Block ["otherwise" Block] ;
+LoopStmt = "as long as" Condition "do" Block ;
+TaskStmt = "start a task to" Block ;
+WaitStmt = "wait for" Identifier ;
+
+Block = Indent { Statement } Dedent ;
+
+ExpressionStmt = Expression ;
+
+Expression = String | Number | Identifier | CallExpr ;
+CallExpr = Identifier [Arguments] ;
+Arguments = Expression {"," Expression } ;
+
+Condition = Expression ComparisonOp Expression ;
+ComparisonOp = "equals" | "is less than" | "is greater than" ;
+
+Type = "number" | "text" | "maybe" Type | Identifier ;
+Identifier = ? valid identifier ? ;
+String = '"' { ? any char ? } '"' ;
+Number = ? digits ? ;
+Indent = ? indentation start ? ;
+Dedent = ? indentation end ? ;
