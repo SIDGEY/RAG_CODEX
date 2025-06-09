@@ -1,0 +1,17 @@
+# Example Humana code demonstrating variables, conditions, loops and parallel execution
+
+remember count is 0 as number
+
+when greet do
+  say "Hello"
+
+start a task to
+  as long as count is less than 5 do
+    set count to count + 1
+    say "Counting" + count
+  end
+
+do
+  wait for task
+  say "Done"
+end
